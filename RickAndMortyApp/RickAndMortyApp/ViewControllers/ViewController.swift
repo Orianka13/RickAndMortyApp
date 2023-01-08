@@ -17,26 +17,15 @@ class ViewController: UIViewController {
     
     private func fetchCharacter() {
         let url = "https://rickandmortyapi.com/api/character"
-        guard let url = URL(string: url) else { return }
         
-        let session = URLSession(configuration: .default)
-        
-        session.dataTask(with: url) { data, _, error in
-            guard let data = data else {
-                print(error?.localizedDescription ?? "No error description")
-                return
-            }
-            
-            let jsonDecoder = JSONDecoder()
-            
-            do {
-                let info = try jsonDecoder.decode(Info.self, from: data)
+        NetworkManager.shared.fetchCharacter(from: url) { result in
+            switch result {
+            case .success(let info):
                 print(info.results)
-            } catch {
-                print(error.localizedDescription)
+            case .failure(let error):
+                print(error)
             }
-            
-        }.resume()
+        }
     }
 }
 
