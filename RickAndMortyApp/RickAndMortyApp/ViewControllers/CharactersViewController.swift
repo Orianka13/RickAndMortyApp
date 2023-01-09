@@ -18,22 +18,7 @@ class CharactersViewController: UICollectionViewController {
         fetchCharacter()
     }
     
-    private func fetchCharacter() {
-        let url = "https://rickandmortyapi.com/api/character"
-        
-        NetworkManager.shared.fetchCharacter(from: url) { [weak self] result in
-            switch result {
-            case .success(let info):
-                self?.characters = info.results
-                self?.collectionView.reloadData()
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
     // MARK: - Navigation
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let detailsVC = segue.destination as? DetailsViewController {
@@ -68,17 +53,28 @@ class CharactersViewController: UICollectionViewController {
                 print(error)
             }
         }
-        
         return cell
     }
     
+    //MARK: - Networking
     
-    
-    
-    // MARK: UICollectionViewDelegate
-    
+    private func fetchCharacter() {
+        let url = "https://rickandmortyapi.com/api/character"
+        
+        NetworkManager.shared.fetchCharacter(from: url) { [weak self] result in
+            switch result {
+            case .success(let info):
+                self?.characters = info.results
+                self?.collectionView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
     
 }
+
+// MARK: - UICollectionViewDelegateFlowLayout
 
 extension CharactersViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

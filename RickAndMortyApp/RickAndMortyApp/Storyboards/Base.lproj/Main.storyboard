@@ -91,6 +91,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ssP-cG-5GO"/>
+                    <connections>
+                        <outlet property="characterDescription" destination="PKS-ui-dbj" id="l4D-my-viJ"/>
+                        <outlet property="imageView" destination="Zii-SE-suO" id="m23-Eu-tqv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="63w-CC-2I7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
