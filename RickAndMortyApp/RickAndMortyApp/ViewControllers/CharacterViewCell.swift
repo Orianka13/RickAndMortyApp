@@ -10,11 +10,8 @@ import UIKit
 class CharacterViewCell: UICollectionViewCell {
     
     @IBOutlet private var imageView: UIImageView!
+    
     static let reuseIdentifier = "cell"
-    override func awakeFromNib() {
-          super.awakeFromNib()
-         
-      }
     
     func setImage(with data: Data) {
         imageView.image = UIImage(data: data)

@@ -15,6 +15,14 @@ struct CharacterInfo: Decodable {
     let species: String
     let location: Location
     let image: String
+    
+    var description: String {
+        """
+        Имя: \(name)
+        Вид: \(species)
+        Локация: \(location.name)
+        """
+    }
 }
 
 struct Location: Decodable {
