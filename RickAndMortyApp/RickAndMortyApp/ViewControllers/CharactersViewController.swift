@@ -7,23 +7,26 @@
 
 import UIKit
 
-private let reuseIdentifier = "cell"
+
 
 class CharactersViewController: UICollectionViewController {
+    
+    private var characters: [CharacterInfo] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchCharacter()
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+//        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: CharacterViewCell.reuseIdentifier)
     }
     
     private func fetchCharacter() {
         let url = "https://rickandmortyapi.com/api/character"
         
-        NetworkManager.shared.fetchCharacter(from: url) { result in
+        NetworkManager.shared.fetchCharacter(from: url) { [weak self] result in
             switch result {
             case .success(let info):
-                print(info.results)
+                self?.characters = info.results
+                self?.collectionView.reloadData()
             case .failure(let error):
                 print(error)
             }
@@ -41,22 +44,29 @@ class CharactersViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 0
-    }
-
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        characters.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterViewCell.reuseIdentifier, for: indexPath) as! CharacterViewCell
+        
+        let character = characters[indexPath.item]
+        
+        NetworkManager.shared.fetchImage(from: character.image) { result in
+            switch result {
+            case .success(let imageData):
+                cell.setImage(with: imageData)
+            case .failure(let error):
+                print(error)
+            }
+        }
     
         return cell
     }
+    
+    
 
     // MARK: UICollectionViewDelegate
 
