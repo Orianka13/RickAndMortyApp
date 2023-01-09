@@ -16,7 +16,6 @@ class CharactersViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchCharacter()
-//        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: CharacterViewCell.reuseIdentifier)
     }
     
     private func fetchCharacter() {
@@ -66,6 +65,7 @@ class CharactersViewController: UICollectionViewController {
         return cell
     }
     
+
     
 
     // MARK: UICollectionViewDelegate
@@ -99,4 +99,11 @@ class CharactersViewController: UICollectionViewController {
     }
     */
 
+}
+
+extension CharactersViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let size = CGFloat(UIScreen.main.bounds.width / 2 - 13)
+        return CGSize(width: size, height: size)
+    }
 }

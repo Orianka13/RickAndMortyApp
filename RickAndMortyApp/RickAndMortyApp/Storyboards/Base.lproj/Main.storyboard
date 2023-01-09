@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MAH-aX-1cq">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="layoutMargins" id="MAH-aX-1cq">
                             <size key="itemSize" width="128" height="128"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -25,9 +25,9 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="7LU-8P-fNI" customClass="CharacterViewCell" customModule="RickAndMortyApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                <rect key="frame" x="8" y="8" width="128" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="97f-Sp-e3f">
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="yfU-qb-MFP">
                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
@@ -37,11 +37,12 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="OdX-ri-dpf" secondAttribute="bottom" id="Gqq-bq-BFP"/>
-                                        <constraint firstItem="OdX-ri-dpf" firstAttribute="top" secondItem="97f-Sp-e3f" secondAttribute="top" id="PIh-wH-wk0"/>
-                                        <constraint firstItem="OdX-ri-dpf" firstAttribute="leading" secondItem="97f-Sp-e3f" secondAttribute="leading" id="dV4-Em-kCf"/>
+                                        <constraint firstItem="OdX-ri-dpf" firstAttribute="top" secondItem="yfU-qb-MFP" secondAttribute="top" id="PIh-wH-wk0"/>
+                                        <constraint firstItem="OdX-ri-dpf" firstAttribute="leading" secondItem="yfU-qb-MFP" secondAttribute="leading" id="dV4-Em-kCf"/>
                                         <constraint firstAttribute="trailing" secondItem="OdX-ri-dpf" secondAttribute="trailing" id="n3P-Gz-15C"/>
                                     </constraints>
                                 </collectionViewCellContentView>
+                                <size key="customSize" width="128" height="128"/>
                                 <connections>
                                     <outlet property="imageView" destination="OdX-ri-dpf" id="8zf-kD-EeD"/>
                                 </connections>
