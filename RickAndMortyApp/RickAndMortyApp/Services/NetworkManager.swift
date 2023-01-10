@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 enum NetworkError: Error {
     case invalidURL
@@ -34,27 +35,47 @@ class NetworkManager {
         }
     }
     
-    func fetchCharacter(from url: String, completion: @escaping(Result<Info, NetworkError>) -> Void) {
-        guard let url = URL(string: url) else {
-            completion(.failure(.invalidURL))
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url) { (data, _, error) in
-            guard let data = data else {
-                completion(.failure(.noData))
-                print(error?.localizedDescription ?? "No error description")
-                return
-            }
-            do {
-                let  info = try JSONDecoder().decode(Info.self, from: data)
-                DispatchQueue.main.async {
+    func fetchCharacter(from url: String, completion: @escaping(Result<Info, AFError>) -> Void) {
+        guard let url = URL(string: url) else { return }
+        AF.request(url)
+            .validate()
+            .responseJSON { response in
+                switch response.result{
+                case .success(let value):
+                    guard let info = Info.getInfo(from: value) else { return }
                     completion(.success(info))
+                case .failure(let error):
+                    completion(.failure(error))
                 }
-            } catch {
-                completion(.failure(.decodingError))
             }
-        }.resume()
+        
+//        URLSession.shared.dataTask(with: url) { (data, _, error) in
+//            guard let data = data else {
+//                completion(.failure(.noData))
+//                print(error?.localizedDescription ?? "No error description")
+//                return
+//            }
+//            do {
+//                let  info = try JSONDecoder().decode(Info.self, from: data)
+//                DispatchQueue.main.async {
+//                    completion(.success(info))
+//                }
+//            } catch {
+//                completion(.failure(.decodingError))
+//            }
+//        }.resume()
     }
 }
 
+
+//func fetchData(from url: String, completion: @escaping(Result<Data, AFError>) -> Void) {
+//    AF.request(url)
+//        .responseData { response in
+//            switch response.result {
+//            case .success(let imageData):
+//                completion(.success(imageData))
+//            case .failure(let error):
+//                completion(.failure(error))
+//            }
+//        }
+//}
