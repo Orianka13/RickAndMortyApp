@@ -14,17 +14,17 @@ class DetailsViewController: UIViewController {
     @IBOutlet private var characterDescription: UILabel!
     
     var character: CharacterInfo!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupUI()
     }
     
     private func setupUI() {
         characterDescription.text = character.description
         
-        NetworkManager.shared.fetchImage(from: character.image) { [weak self] result in
+        NetworkManager.shared.fetchData(from: character.image) { [weak self] result in
             switch result {
             case .success(let imageData):
                 self?.setImage(with: imageData)

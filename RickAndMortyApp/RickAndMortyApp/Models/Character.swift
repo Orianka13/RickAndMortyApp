@@ -54,17 +54,3 @@ extension Info {
         return Info(infoData: infoData)
     }
 }
-
-//extension CharacterInfo {
-//    static func getCharacter(from value: Any) -> [CharacterInfo] {
-//        guard let characterData = value as? [[String: Any]] else { return [] }
-//        return characterData.compactMap { CharacterInfo(characterData: $0)}
-//    }
-//}
-//
-//extension Location {
-//    static func getLocation(from value: Any) -> Location? {
-//        guard let locationData = value as? [String: Any] else { return nil }
-//        return Location(locationData: locationData)
-//    }
-//}

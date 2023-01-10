@@ -49,14 +49,14 @@ class CharactersViewController: UICollectionViewController {
         
         cell.layer.cornerRadius = 10
         
-//        NetworkManager.shared.fetchImage(from: character.image) { result in
-//            switch result {
-//            case .success(let imageData):
-//                cell.setImage(with: imageData)
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
+        NetworkManager.shared.fetchData(from: character.image) { result in
+            switch result {
+            case .success(let imageData):
+                cell.setImage(with: imageData)
+            case .failure(let error):
+                print(error)
+            }
+        }
         return cell
     }
     
@@ -69,7 +69,6 @@ class CharactersViewController: UICollectionViewController {
             switch result {
             case .success(let info):
                 self?.characters = info.results
-                print(self?.characters)
                 self?.collectionView.reloadData()
             case .failure(let error):
                 print(error.localizedDescription)
