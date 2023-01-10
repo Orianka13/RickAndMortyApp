@@ -39,7 +39,11 @@ class CharactersViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterViewCell.reuseIdentifier, for: indexPath) as! CharacterViewCell
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: CharacterViewCell.reuseIdentifier,
+            for: indexPath) as? CharacterViewCell else {
+            return UICollectionViewCell()
+        }
         
         let character = characters[indexPath.item]
         
