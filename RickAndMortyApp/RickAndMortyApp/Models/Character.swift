@@ -30,7 +30,7 @@ struct CharacterInfo: Decodable {
     }
     
     init(characterData: [String: Any]) {
-        let locationData = characterData["location"] as? [String: Any]
+        let locationData = characterData["location"] as? [String: String]
         
         self.name = characterData["name"] as? String ?? ""
         self.species = characterData["species"] as? String ?? ""
@@ -43,8 +43,8 @@ struct CharacterInfo: Decodable {
 struct Location: Decodable {
     let name: String
     
-    init(locationData: [String: Any]) {
-        name = locationData["name"] as? String ?? ""
+    init(locationData: [String: String]) {
+        name = locationData["name"] ?? ""
     }
 }
 
